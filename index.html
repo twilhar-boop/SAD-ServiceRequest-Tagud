@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ICT Service Request System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600;650&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="mark">ICT-SRS</span>
+      <span class="name">ICT Service Request System</span>
+      <span class="sub">University ICT Office</span>
+    </div>
+    <div class="who">
+      <span>Signed in as <span class="email" id="who-email">—</span></span>
+      <button class="btn-logout" id="btn-logout">Log out</button>
+    </div>
+  </header>
+
+  <main class="shell">
+
+    <!-- Dashboard -->
+    <div class="section-heading">
+      <h2>Dashboard</h2>
+      <span class="hint">Live counts from all logged requests</span>
+    </div>
+    <div class="dashboard">
+      <div class="stat-card total">
+        <div class="label">Total Requests</div>
+        <div class="value" id="stat-total">0</div>
+      </div>
+      <div class="stat-card pending">
+        <div class="label">Pending</div>
+        <div class="value" id="stat-pending">0</div>
+      </div>
+      <div class="stat-card progress">
+        <div class="label">In Progress</div>
+        <div class="value" id="stat-progress">0</div>
+      </div>
+      <div class="stat-card done">
+        <div class="label">Completed</div>
+        <div class="value" id="stat-completed">0</div>
+      </div>
+    </div>
+
+    <!-- Requests -->
+    <div class="section-heading">
+      <h2>Service Requests</h2>
+      <span class="hint">Search, filter, and manage submitted requests</span>
+    </div>
+
+    <div class="toolbar">
+      <button class="btn-primary" id="btn-new-request">+ New Request</button>
+      <input type="text" class="field-search" id="search-input" placeholder="Search by requester name or description…" />
+      <select class="field-select" id="filter-status">
+        <option value="All">Status: All</option>
+        <option value="Pending">Pending</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Completed">Completed</option>
+      </select>
+      <select class="field-select" id="filter-priority">
+        <option value="All">Priority: All</option>
+        <option value="High">High</option>
+        <option value="Medium">Medium</option>
+        <option value="Low">Low</option>
+      </select>
+    </div>
+
+    <div class="table-wrap">
+      <table class="requests">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Requester</th>
+            <th>Category</th>
+            <th>Priority</th>
+            <th>Status</th>
+            <th>Description</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="requests-tbody">
+          <tr class="empty-row"><td colspan="7">Loading requests…</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Analytics (bonus / optional enhancement) -->
+    <div class="section-heading">
+      <h2>Request Analytics</h2>
+      <span class="hint">Optional enhancement — computed live from the database</span>
+    </div>
+    <div class="analytics">
+      <div class="analytics-card">
+        <h3>By Category</h3>
+        <div id="analytics-category"></div>
+      </div>
+      <div class="analytics-card">
+        <h3>By Priority</h3>
+        <div id="analytics-priority"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Create / Edit modal -->
+  <div class="modal-backdrop hidden" id="modal-backdrop">
+    <div class="modal">
+      <header>
+        <h2 id="modal-title">New Service Request</h2>
+        <button class="close" id="btn-modal-close">✕</button>
+      </header>
+      <form id="request-form" novalidate>
+        <div class="body">
+          <div class="form-row" id="row-requester">
+            <label for="field-requester">Requester Name</label>
+            <input type="text" id="field-requester" />
+            <div class="error">Requester name cannot be empty. (BR-01)</div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-row" id="row-department">
+              <label for="field-department">Department</label>
+              <input type="text" id="field-department" />
+              <div class="error">Department must be provided. (BR-02)</div>
+            </div>
+            <div class="form-row" id="row-category">
+              <label for="field-category">Category</label>
+              <select id="field-category"></select>
+              <div class="error">Category must be selected. (BR-03)</div>
+            </div>
+          </div>
+
+          <div class="form-row" id="row-description">
+            <label for="field-description">Description</label>
+            <textarea id="field-description" placeholder="Describe the ICT concern in enough detail to act on it…"></textarea>
+            <div class="error">Description must contain sufficient information (10+ characters). (BR-04)</div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-row" id="row-priority">
+              <label for="field-priority">Priority</label>
+              <select id="field-priority">
+                <option value="">Select priority…</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+              </select>
+              <div class="error">Priority must be Low, Medium, or High. (BR-05)</div>
+            </div>
+            <div class="form-row hidden" id="row-status">
+              <label for="field-status">Status</label>
+              <select id="field-status">
+                <option value="Pending">Pending</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <footer>
+          <button type="button" class="btn-secondary" id="btn-modal-cancel">Cancel</button>
+          <button type="submit" class="btn-primary" id="btn-modal-save">Save Request</button>
+        </footer>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast hidden" id="toast"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
