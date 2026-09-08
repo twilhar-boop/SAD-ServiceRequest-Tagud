@@ -14,14 +14,13 @@ Full SAD analysis (problem statement, actors, use case diagram, ERD) is in
 
 See [`documentation/system-analysis.md`](documentation/system-analysis.md#1-problem-statement).
 
-## 2. Use Case Diagram
+## 2. ERD
 
-See [`documentation/system-analysis.md`](documentation/system-analysis.md#3-use-case-diagram).
+![ERD](images/ERD.png)
 
-## 3. ERD
+## 3. Sequence Diagram
 
-See [`documentation/system-analysis.md`](documentation/system-analysis.md#4-simple-erd).
-
+![Sequence Diagram](images/sequence-diagram.png)
 ---
 
 ## 4. Project Structure
