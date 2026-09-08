@@ -136,12 +136,4 @@ live Supabase data returned by `loadRequests()` — nothing is hard-coded.
 - Passwords/test credentials are **not** included in this README; submit
   them separately through the LMS as instructed in the lab spec.
 
-## 11. Submission
 
-```
-Student:          <Your Name>
-Section:           <Your Section>
-GitHub Repository:  https://github.com/<username>/SAD-ServiceRequest-<Lastname>
-Live System:          https://<username>.github.io/SAD-ServiceRequest-<Lastname>/
-Test Account:            <submitted separately via LMS>
-```
