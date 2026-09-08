@@ -62,7 +62,7 @@ async function loadRequests() {
 
 function setTableLoading() {
   const tbody = document.getElementById("requests-tbody");
-  tbody.innerHTML = `<tr class="empty-row"><td colspan="7">Loading requests…</td></tr>`;
+  tbody.innerHTML = `<tr class="empty-row"><td colspan="8">Loading requests…</td></tr>`;
 }
 
 // ---------- dashboard ---------------------------------------------------
@@ -161,7 +161,7 @@ function renderTable(rows) {
   const tbody = document.getElementById("requests-tbody");
 
   if (rows.length === 0) {
-    tbody.innerHTML = `<tr class="empty-row"><td colspan="7">No requests match the current search/filter.</td></tr>`;
+    tbody.innerHTML = `<tr class="empty-row"><td colspan="8">No requests match the current search/filter.</td></tr>`;
     return;
   }
 
@@ -177,6 +177,7 @@ function renderTable(rows) {
         <td>${escapeHtml(r.category)}</td>
         <td><span class="badge ${priorityClass}">${escapeHtml(r.priority)}</span></td>
         <td><span class="badge ${statusClass}">${escapeHtml(r.status)}</span></td>
+        <td>${r.created_at ? new Date(r.created_at).toLocaleDateString() : "—"}</td>
         <td class="req-desc">${escapeHtml(truncate(r.description, 70))}</td>
         <td class="row-actions">
           ${
