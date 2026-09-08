@@ -107,17 +107,15 @@ Business-rule traceability (BR-01 through BR-10) is documented in
 
 | Test ID | Test Scenario | Expected Result | Result |
 |---|---|---|---|
-| TC-01 | Login using valid account | Dashboard appears | ☐ PASS / ☐ FAIL |
-| TC-02 | Submit valid request | Request saved | ☐ PASS / ☐ FAIL |
-| TC-03 | Display requests | Existing records appear | ☐ PASS / ☐ FAIL |
-| TC-04 | Modify request | Changes saved | ☐ PASS / ☐ FAIL |
-| TC-05 | Delete request | Confirmation appears and record is removed | ☐ PASS / ☐ FAIL |
-| TC-06 | Search requester | Matching records displayed | ☐ PASS / ☐ FAIL |
-| TC-07 | Filter Pending requests | Only Pending records displayed | ☐ PASS / ☐ FAIL |
-| TC-08 | Open deployed URL | Application loads online | ☐ PASS / ☐ FAIL |
+| TC-01 | Login using valid account | Dashboard appears | PASS |
+| TC-02 | Submit valid request | Request saved | PASS |
+| TC-03 | Display requests | Existing records appear | PASS |
+| TC-04 | Modify request | Changes saved | PASS  |
+| TC-05 | Delete request | Confirmation appears and record is removed | PASS |
+| TC-06 | Search requester | Matching records displayed | PASS  |
+| TC-07 | Filter Pending requests | Only Pending records displayed |  PASS |
+| TC-08 | Open deployed URL | Application loads online |  PASS  |
 
-Fill in PASS/FAIL after testing your own deployment and take screenshots for
-submission.
 
 ## 9. Optional Enhancement — Request Analytics
 
